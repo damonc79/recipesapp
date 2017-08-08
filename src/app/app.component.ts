@@ -7,5 +7,10 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  currPath = "recipes";
+
+  activePath(path: string){
+    this.currPath = path;
+  }
 
 }

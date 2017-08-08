@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-10">
-    <app-edit-list></app-edit-list>
+    <app-edit-list (ingOut)="newIngAdded($event)"></app-edit-list>
     <hr>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let ingredient of ingredients">

@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ServerService } from 'app/shared/server.service';
+import { Response } from "@angular/http";
 
 @Component({
   selector: 'app-header',
@@ -9,9 +11,21 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private serverService: ServerService) { }
 
   ngOnInit() {
+  }
+
+  saveRecipes(){
+    this.serverService.updateRecipes().subscribe(
+      (response: Response) => {
+        console.log(response)
+      }
+    );
+  }
+
+  fetchRecipes(){
+    this.serverService.getRecipes();
   }
 
 }

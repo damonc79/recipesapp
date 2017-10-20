@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-root',
@@ -6,11 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   currPath = "recipes";
 
   activePath(path: string){
     this.currPath = path;
+  }
+
+  ngOnInit(){
+    firebase.initializeApp({
+      apiKey: "AIzaSyAPQGAXwsLifPhE6ui_N3GVkOXF6cwBVWI",
+      authDomain: "udemy-recipes-26c8a.firebaseapp.com"
+    })
   }
 
 }

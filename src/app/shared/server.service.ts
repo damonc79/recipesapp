@@ -4,15 +4,18 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/Rx";
 import { RecipeService } from 'app/recipe-book/recipe.service';
 import { Recipe } from "app/recipe-book/recipe.model";
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class ServerService {
 
-  constructor(private http: Http, private recipeService: RecipeService) { }
+  constructor(private http: Http, private recipeService: RecipeService, private authService: AuthService) { }
 
   getRecipes(){
     //get
-    this.http.get("https://udemy-recipes-26c8a.firebaseio.com/recipes.json")
+    const token = this.authService.getToken();
+
+    this.http.get("https://udemy-recipes-26c8a.firebaseio.com/recipes.json?auth=" + token)
     .map(
       (response: Response) => {
         const recipes: Recipe[] = response.json();
@@ -38,7 +41,8 @@ export class ServerService {
 
   updateRecipes(){
     //put
-    return this.http.put("https://udemy-recipes-26c8a.firebaseio.com/recipes.json", this.recipeService.getRecipes());
+    const token = this.authService.getToken();
+    return this.http.put("https://udemy-recipes-26c8a.firebaseio.com/recipes.json?auth=" + token, this.recipeService.getRecipes());
   }
 
   deleteRecipe(){

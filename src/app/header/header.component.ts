@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ServerService } from 'app/shared/server.service';
 import { Response } from "@angular/http";
+import { AuthService } from '../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,7 @@ import { Response } from "@angular/http";
 
 export class HeaderComponent implements OnInit {
 
-  constructor(private serverService: ServerService) { }
+  constructor(private serverService: ServerService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,6 +28,11 @@ export class HeaderComponent implements OnInit {
 
   fetchRecipes(){
     this.serverService.getRecipes();
+  }
+
+  onLogout(){
+    this.authService.signoutUser();
+    this.router.navigate(["/"]);
   }
 
 }

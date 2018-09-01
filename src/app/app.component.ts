@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
       apiKey: "AIzaSyAPQGAXwsLifPhE6ui_N3GVkOXF6cwBVWI",
       authDomain: "udemy-recipes-26c8a.firebaseapp.com"
     })
+    /* TODO check for token on app startup */
   }
 
 }
